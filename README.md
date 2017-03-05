@@ -27,3 +27,22 @@ bookRouter.route('/').get(function(req,res){
   }
 })
 ```
+for single book
+```
+bookRouter.route('/').get(function(req,res){
+  var url=''
+  var id = new Objectid(req.params.id);
+  mongodb.connect(url,function(err,db){
+    var collection = db.collection('books');
+    collection.findOne({_id:id},
+      function(err,res){
+        res.render('bookView',{
+          title:'',
+          nav:nav
+          books:res
+        })
+      }
+    )
+  }
+})
+```
